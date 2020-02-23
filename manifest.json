@@ -1,0 +1,26 @@
+{
+	"name": "Tab Switch",
+	"author": "Florian Schroevers",
+	"homepage_url": "https://github.com/FlorianSchroevers/tabswitch",
+	"description": "Switch tabs using ctrl+left and ctrl+right",
+	"manifest_version": 2,
+	"version": "1.0",
+	"permissions": ["tabs"],
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"commands": {
+		"next-tab": {
+			"suggested_key": {
+				"default": "Ctrl+Left"
+			},
+			"description": "Switch to tab to the right"
+		},
+		"previous-tab": {
+			"suggested_key": {
+				"default": "Ctrl+Right"
+			},
+			"description": "Switch to tab to the left"
+		}
+	}
+}
