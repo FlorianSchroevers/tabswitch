@@ -9,31 +9,35 @@ browser.commands.onCommand.addListener(function(command) {
 		direction = -1;
 	}
 
-	// find tab that is currently open
-	var tabQuery = browser.tabs.query({currentWindow: true, active: true});
-	tabQuery.then(findOtherTab, onError);
+	// find the active window
+	browser.windows.getCurrent({populate: true}).then((windowInfo) => {
+		// find the active tab in the active window
+		browser.tabs.query(
+			{active: true, windowId: windowInfo.id}
+		).then((activeTab) => {
+			// find index of current active window
+			i = activeTab[0].index;
+
+			// case where the active tab is the last tab and
+			// the directions is to the right (creates a new tab)
+			if (i - direction >= windowInfo.tabs.length) {
+				var creating = browser.tabs.create({});
+				creating.then(onNewTabCreated, onError);
+
+			// switch the active tab
+			} else if (i - direction >= 0) {
+				var otherTab = windowInfo.tabs[i - direction]
+				browser.tabs.update(otherTab.id, {active: true});
+			}
+		});
+	});	
 })
 
-function findOtherTab(currentTabs) {
-	// find all other tabs
-	let otherTab = browser.tabs.query({index: currentTabs[0].index - direction});
-	otherTab.then(switchTab, onError);
-}
-
-function switchTab(otherTabs) {
-	console.log(otherTabs.length);
-	if (otherTabs.length) {
-		browser.tabs.update(otherTabs[0].id, {active: true});
-	} else {
-		var creating = browser.tabs.create({});
-		creating.then(onNewTabCreated, onError);
-	}
-}
 
 function onError(msg) {
 	console.log(msg);
 }
 
 function onNewTabCreated(tab) {
-	console.log(tab.id);
+	void(0);
 }

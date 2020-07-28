@@ -4,7 +4,7 @@
 	"homepage_url": "https://github.com/FlorianSchroevers/tabswitch",
 	"description": "Switch tabs using ctrl+left and ctrl+right",
 	"manifest_version": 2,
-	"version": "1.2",
+	"version": "1.3",
 	"permissions": ["tabs"],
 	"background": {
 		"scripts": ["background.js"]
