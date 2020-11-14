@@ -1,0 +1,14 @@
+{
+	"extensionName": {
+		"message": "Tab Switch"
+	},
+	"extensionDescription": {
+		"message": "Switch tabs using ctrl+left and ctrl+right, you can customize it at Extensions > The Gear Icon > Manage Extension Shortcuts"
+	},
+	"extensionNextTabDescription": {
+		"message": "Switch to tab to the right"
+	},
+	"extensionPrevTabDescription": {
+		"message": "Switch to tab to the left"
+	}
+}

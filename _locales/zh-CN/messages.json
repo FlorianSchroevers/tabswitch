@@ -1,0 +1,14 @@
+{
+	"extensionName": {
+		"message": "切换标签页"
+	},
+	"extensionDescription": {
+		"message": "使用 ctrl+left 、 ctrl+right 切换至相邻标签页，在 扩展 > 齿轮图标 > 管理扩展快捷键 处可以自定义快捷键"
+	},
+	"extensionNextTabDescription": {
+		"message": "切换到下一个（右侧）标签页"
+	},
+	"extensionPrevTabDescription": {
+		"message": "切换到上一个（左侧）标签页"
+	}
+}
