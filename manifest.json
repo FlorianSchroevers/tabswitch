@@ -3,12 +3,12 @@
 	"author": "Florian Schroevers",
 	"homepage_url": "https://github.com/FlorianSchroevers/tabswitch",
 	"description": "__MSG_extensionDescription__",
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"default_locale": "en",
 	"version": "1.3.1",
 	"permissions": ["tabs"],
 	"background": {
-		"scripts": ["background.js"]
+		"service_worker": "background.js"
 	},
 	"commands": {
 		"next-tab": {

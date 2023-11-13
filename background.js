@@ -1,5 +1,9 @@
 var direction = 1;
 
+if (typeof browser === "undefined") {
+    var browser = chrome;
+}
+
 browser.commands.onCommand.addListener(function(command) {
 	if (command == "next-tab") {
 		// move to index + 1
