@@ -15,7 +15,7 @@ browser.commands.onCommand.addListener(function(command) {
 		browser.tabs.query(
 			{active: true, windowId: windowInfo.id}
 		).then((activeTab) => {
-			// find index of current active window
+			// find index of current active window change comment
 			i = activeTab[0].index;
 
 			// case where the active tab is the last tab and
