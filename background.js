@@ -18,14 +18,25 @@ browser.commands.onCommand.addListener(function(command) {
 			// find index of current active window change comment
 			i = activeTab[0].index;
 
-			// case where the active tab is the last tab and
-			// the directions is to the right (creates a new tab)
-			if (i - direction >= windowInfo.tabs.length) {
-				var creating = browser.tabs.create({});
-				creating.then(onNewTabCreated, onError);
+			// case switching tab would cause overflow
+			if (i - direction >= windowInfo.tabs.length || i - direction < 0) {
+				// read local settings for overflow behaviour
+				let gettingSetting = browser.storage.local.get("overflowBehaviour");
 
-			// switch the active tab
-			} else if (i - direction >= 0) {
+				gettingSetting.then((setting) => {
+					if (setting.overflowBehaviour == "loop" && i - direction >= windowInfo.tabs.length) {
+						//  Loop (set tab with index 0 to current active tab)
+						browser.tabs.update(windowInfo.tabs[0].id, {active: true});
+					} else if (setting.overflowBehaviour == "loop" && i - direction < 0) {
+						//  Loop (set tab with index of last tab to current active tab)
+						browser.tabs.update(windowInfo.tabs[windowInfo.tabs.length - 1].id, {active: true});
+					} else if (setting.overflowBehaviour == "newTab" && i - direction >= windowInfo.tabs.length) {
+						var creating = browser.tabs.create({});
+						creating.then(onNewTabCreated, onError);
+					}
+				});
+			} else {
+				// switch the active tab
 				var otherTab = windowInfo.tabs[i - direction]
 				browser.tabs.update(otherTab.id, {active: true});
 			}
@@ -33,6 +44,7 @@ browser.commands.onCommand.addListener(function(command) {
 	});	
 })
 
+browser.browserAction.onClicked.addListener(handleClick);
 
 function onError(msg) {
 	console.log(msg);
@@ -40,4 +52,8 @@ function onError(msg) {
 
 function onNewTabCreated(tab) {
 	void(0);
+}
+
+function handleClick() {
+	browser.runtime.openOptionsPage();
 }
