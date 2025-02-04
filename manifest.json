@@ -5,8 +5,17 @@
 	"description": "__MSG_extensionDescription__",
 	"manifest_version": 2,
 	"default_locale": "en",
-	"version": "1.3.1",
-	"permissions": ["tabs"],
+	"version": "1.4.0",
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "{95a91cd3-346f-4312-b011-0d24d841e981}",
+			"strict_min_version": "58.0"
+		}
+	},
+	"permissions": [
+		"tabs",
+		"storage"
+	],
 	"background": {
 		"scripts": ["background.js"]
 	},
@@ -15,13 +24,20 @@
 			"suggested_key": {
 				"default": "Ctrl+Left"
 			},
-			"description": "__MSG_extensionNextTabDescription__"
+			"description": "__MSG_extensionPrevTabDescription__"
 		},
 		"previous-tab": {
 			"suggested_key": {
 				"default": "Ctrl+Right"
 			},
-			"description": "__MSG_extensionPrevTabDescription__"
+			"description": "__MSG_extensionNextTabDescription__"
 		}
-	}
+	},
+	"options_ui": {
+		"page": "settings/options.html",
+		"browser_style": true
+	},
+	"browser_action": {
+    	"default_title": "Tab Switch Settings"
+  	}
 }
